@@ -1,10 +1,12 @@
 <?php
 /**
- * Plugin Name: WordPress Multisites Utilities Plugin
- * Plugin URI: http://me.dangtrinh.com
- * Description: Creates a function that lists recent posts from all sites of the network. Call it in another plugins or themes.
- * Author: Trinh Nguyen
- * Network: True
+ * Plugin Name:		WordPress Multisite Utilities
+ * Plugin URI:		https://github.com/dangtrinh/WordPress_Multisites_Utilities_Plugin
+ * Description:		Some utilities functions for WP Multisite you can use in your plugin or template
+ * Author:			Trinh Nguyen
+ * Author URI:		http://me.dangtrinh.com
+ * License:			GPLv2 or later
+ * Network:			True
  */
 
 /**
@@ -144,6 +146,7 @@ function add_site_path_to_thumb_url($thumb_url, $site_id) {
 }
 
 
+// A function that lists recent posts from all sites of the network. Call it in another plugins or themes.
 function get_recent_network_posts( $howMany = 6 ) {
  
   global $wpdb;
@@ -208,20 +211,5 @@ function get_recent_network_posts( $howMany = 6 ) {
   else: 
     return "Error: Could not find blogs"; 
   endif;
-}
-
-// hide the main theme
-add_filter( 'extra_theme_headers', 'wpse_55081_remove_themes_everywhere', 10, 1 );
-function wpse_55081_remove_themes_everywhere($arr)
-{
-    global $wp_themes;
-    unset($wp_themes['gridsby']);
-}
-
-add_filter( 'all_themes', 'wpse_55081_remove_themes_ms' );
-function wpse_55081_remove_themes_ms($themes)
-{
-    unset($themes['Gridsby']);
-    return $themes;
 }
 ?>
