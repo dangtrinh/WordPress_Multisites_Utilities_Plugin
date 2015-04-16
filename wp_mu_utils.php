@@ -215,6 +215,6 @@ add_filter( 'extra_theme_headers', 'wpse_55081_remove_themes_everywhere', 10, 1 
 function wpse_55081_remove_themes_everywhere($arr)
 {
     global $wp_themes;
-    unset($wp_themes['Gridsby']);
+    unset($wp_themes['gridsby']);
 }
 ?>
