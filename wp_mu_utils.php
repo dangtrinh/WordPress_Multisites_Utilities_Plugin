@@ -217,4 +217,11 @@ function wpse_55081_remove_themes_everywhere($arr)
     global $wp_themes;
     unset($wp_themes['gridsby']);
 }
+
+add_filter( 'all_themes', 'wpse_55081_remove_themes_ms' );
+function wpse_55081_remove_themes_ms($themes)
+{
+    unset($themes['Gridsby']);
+    return $themes;
+}
 ?>
