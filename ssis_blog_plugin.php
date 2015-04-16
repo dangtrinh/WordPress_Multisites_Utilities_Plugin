@@ -196,7 +196,6 @@ function get_recent_network_posts( $howMany = 6 ) {
 			$mypost['the_post'] = get_blog_post( $row->blog_id, $row->ID );
 			$mypost['thumb_url'] = add_site_path_to_thumb_url($thumb_src[0], (string)$row->blog_id);
 			$mypost['permalink'] = get_blog_permalink($row->blog_id, $row->ID);
-			$mypost['time'] = get_post_time('F j, Y', true, $row->ID);
 	        $posts[] = $mypost;
         endforeach;
         # echo "<pre>"; print_r($posts); echo "</pre>"; exit; # debugging code
