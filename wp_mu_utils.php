@@ -1,14 +1,13 @@
 <?php
 /**
- * Plugin Name: SSIS Blog Plugin
+ * Plugin Name: WordPress Multisites Utilities Plugin
  * Plugin URI: http://me.dangtrinh.com
  * Description: Creates a function that lists recent posts from all sites of the network. Call it in another plugins or themes.
  * Author: Trinh Nguyen
+ * Network: True
  */
 
 /**
- * Iterates throught all sites of the network and grab the recent posts
- *//**
  * This function allows you to retrieve the wp_get_attachment_image_src()
  * data for any post's featured image on your network. If you are running
  * a multisite network, you can supply another blog's ID to retrieve a post's
