@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Recent Network Posts
+ * Plugin Name: SSIS Blog Plugin
  * Plugin URI: http://me.dangtrinh.com
  * Description: Creates a function that lists recent posts from all sites of the network. Call it in another plugins or themes.
  * Author: Trinh Nguyen
