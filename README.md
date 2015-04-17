@@ -14,11 +14,17 @@ get_recent_network_posts
 
 ## USAGE
 
-1. Install the WordPress Multisite Utilities Plugin:
-```$ cd /var/www/your_wordpress_installation/wp-content/plugins
-$ git clone https://github.com/dangtrinh/WordPress_Multisites_Utilities_Plugin```
-2. Activate the plugin for your network (network only)
-3. In your home page template file (for example page-home.php), call the get_recent_network_posts function to get latest posts (6 posts by default) from your network. For example:
+* Install the WordPress Multisite Utilities Plugin:
+
+```
+$ cd /var/www/your_wordpress_installation/wp-content/plugins
+
+$ git clone https://github.com/dangtrinh/WordPress_Multisites_Utilities_Plugin
+```
+
+* Activate the plugin for your network (network only)
+* In your home page template file (for example page-home.php), call the get_recent_network_posts function to get latest posts (6 posts by default) from your network. For example:
+
 ```html
 <?php
  $lastposts = get_recent_network_posts();
