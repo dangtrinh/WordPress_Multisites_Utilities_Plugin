@@ -54,14 +54,13 @@ Notes: the return data is an array of objects:
 $posts = Array(
 
 [0] => Array(
-               ['the_post']      => <the post object>
-               ['thumb_url']   => <url of the featured image>
-               ['permalink']   => <permanent link of the post>
-
-[1] => Array(...)
-
+               ['the_post']      => the_post_object,
+               ['thumb_url']   => url_of_the_featured_image,
+               ['permalink']   => permanent_link_of_the_post),
+[1] => Array(...),
 ...
 )
+
 
 ## LICENSE
 
