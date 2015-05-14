@@ -212,4 +212,81 @@ function get_recent_network_posts( $howMany = 6 ) {
     return "Error: Could not find blogs"; 
   endif;
 }
+
+function get_recent_network_post_by_cat($howmany=3, $cat=NULL) {
+ 
+  global $wpdb;
+  global $table_prefix;
+ 
+  // get an array of the table names that our posts will be in
+  // we do this by first getting all of our blog ids and then forming the name of the 
+  // table and putting it into an array
+  $rows = $wpdb->get_results( "SELECT blog_id from $wpdb->blogs WHERE
+    public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0';" );
+
+
+  if ( $rows ) :
+  
+	if(!empty($cat)) {
+		$new_rows = array();
+		foreach( $rows as $ro ):
+			if(get_blog_option($ro->blog_id, 'site_category') == $cat) {
+				$new_rows[] = $ro;
+			}
+		endforeach;
+		$rows = $new_rows;
+	}
+    $blogPostTableNames = array();
+    foreach ( $rows as $row ) :
+ 
+      $blogPostTableNames[$row->blog_id] = $wpdb->get_blog_prefix( $row->blog_id ) . 'posts';
+ 
+    endforeach;
+    # print_r($blogPostTableNames); # debugging code
+ 
+    // now we need to do a query to get all the posts from all our blogs
+    // with limits applied
+    if ( count( $blogPostTableNames ) > 0 ) :
+ 
+      $query = '';
+      $i = 0;
+ 
+      foreach ( $blogPostTableNames as $blogId => $tableName ) :
+ 
+        if ( $i > 0 ) :
+        $query.= ' UNION ';
+        endif;
+ 
+        $query.= " (SELECT ID, post_date, $blogId as `blog_id` FROM $tableName WHERE post_status = 'publish' AND post_type = 'post')";
+        $i++;
+ 
+      endforeach;
+ 
+      $query.= " ORDER BY post_date DESC LIMIT 0,$howMany;";
+      # echo $query; # debugging code
+      $rows = $wpdb->get_results( $query );
+ 
+      // now we need to get each of our posts into an array and return them
+      if ( $rows ) : 
+        $posts = array();
+        foreach ( $rows as $row ) :
+			$thumb_src = get_post_featured_image_src($row->ID, $row->blog_id, 'full');
+			$mypost = array();
+			$mypost['the_post'] = get_blog_post( $row->blog_id, $row->ID );
+			$mypost['thumb_url'] = add_site_path_to_thumb_url($thumb_src[0], (string)$row->blog_id);
+			$mypost['permalink'] = get_blog_permalink($row->blog_id, $row->ID);
+	        $posts[] = $mypost;
+        endforeach;
+        # echo "<pre>"; print_r($posts); echo "</pre>"; exit; # debugging code
+        return $posts; 
+      else: 
+        return "Error: No Posts found"; 
+      endif;
+    else: 
+       return "Error: Could not find blogs in the database"; 
+    endif; 
+  else: 
+    return "Error: Could not find blogs"; 
+  endif;
+}
 ?>
