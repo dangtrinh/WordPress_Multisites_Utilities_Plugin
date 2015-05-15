@@ -71,6 +71,10 @@ $posts = Array(
 ...
 		)
 
+## CONTRIBUTORS
+
+[Trinh Nguyen](http://me.dangtrinh.com)
+
 
 ## LICENSE
 
