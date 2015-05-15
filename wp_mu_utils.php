@@ -221,8 +221,10 @@ function get_recent_network_post_by_cat($howMany=3, $cat=NULL) {
   // get an array of the table names that our posts will be in
   // we do this by first getting all of our blog ids and then forming the name of the 
   // table and putting it into an array
+  //~ $rows = $wpdb->get_results( "SELECT blog_id from $wpdb->blogs WHERE
+    //~ public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0';" );
   $rows = $wpdb->get_results( "SELECT blog_id from $wpdb->blogs WHERE
-    public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0';" );
+    public = '1' AND archived = '0' AND deleted = '0';" );
 
 	#print_r($rows);
 
