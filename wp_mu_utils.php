@@ -213,7 +213,7 @@ function get_recent_network_posts( $howMany = 6 ) {
   endif;
 }
 
-function get_recent_network_post_by_cat($howmany=3, $cat=NULL) {
+function get_recent_network_post_by_cat($howMany=3, $cat=NULL) {
  
   global $wpdb;
   global $table_prefix;
@@ -224,12 +224,12 @@ function get_recent_network_post_by_cat($howmany=3, $cat=NULL) {
   $rows = $wpdb->get_results( "SELECT blog_id from $wpdb->blogs WHERE
     public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0';" );
 
-	print_r($rows);
+	#print_r($rows);
 
   if ( $rows ) :
   
 	if(!empty($cat)) {
-		$new_rows = $rows;
+		$new_rows = array();
 		foreach( $rows as $row ):
 			if(get_blog_option($row->blog_id, 'site_category') == $cat) {
 				$new_rows[] = $row;
