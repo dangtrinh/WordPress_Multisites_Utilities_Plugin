@@ -49,6 +49,14 @@ $ git clone https://github.com/dangtrinh/WordPress_Multisites_Utilities_Plugin
 ?>
 ```
 
+* If your network using the [Multisite Site Category](https://github.com/brasofilo/multisite-site-category) plugin to categorize sites (site_category option), you can use the following function to get latest posts by category:
+
+```html
+<?php
+	$myCategoryLatestPosts = get_recent_network_post_by_cat(3, 'myCategory');
+?>
+```
+
 Notes: the return data is an array of objects:
 
 $posts = Array(
