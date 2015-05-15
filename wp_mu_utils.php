@@ -224,23 +224,22 @@ function get_recent_network_post_by_cat($howmany=3, $cat=NULL) {
   $rows = $wpdb->get_results( "SELECT blog_id from $wpdb->blogs WHERE
     public = '1' AND archived = '0' AND mature = '0' AND spam = '0' AND deleted = '0';" );
 
+	print_r($rows);
 
   if ( $rows ) :
   
 	if(!empty($cat)) {
-		$new_rows = array();
-		foreach( $rows as $ro ):
-			if(get_blog_option($ro->blog_id, 'site_category') == $cat) {
-				$new_rows[] = $ro;
+		$new_rows = $rows;
+		foreach( $rows as $row ):
+			if(get_blog_option($row->blog_id, 'site_category') == $cat) {
+				$new_rows[] = $row;
 			}
 		endforeach;
 		$rows = $new_rows;
 	}
     $blogPostTableNames = array();
-    foreach ( $rows as $row ) :
- 
-      $blogPostTableNames[$row->blog_id] = $wpdb->get_blog_prefix( $row->blog_id ) . 'posts';
- 
+    foreach ( $rows as $row ) : 
+      $blogPostTableNames[$row->blog_id] = $wpdb->get_blog_prefix( $row->blog_id ) . 'posts'; 
     endforeach;
     # print_r($blogPostTableNames); # debugging code
  
